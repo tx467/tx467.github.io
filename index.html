@@ -141,7 +141,7 @@
   "tagline": "Undergraduate researcher interested in the intersection of machine learning, systems, and human-centered computing.",
   "about": "I'm a junior studying Computer Science at NYU Shanghai. My work spans [placeholder research area] and [placeholder research area]. I like reading papers on quiet afternoons, building small tools, and collaborating with thoughtful people.",
   "news": [
-    { "date": "Sep 2026", "pre": "Distributionally Robust Mixture-of-Experts Training is accepted to", "venue": "NeurIPS 2026", "post": " Will be opensourced soon. See you in Sydney!" },
+    { "date": "Sep 2026", "pre": "Distributionally Robust Mixture-of-Experts Training is accepted to", "venue": "NeurIPS 2026", "post": " Will be opensourced soon. See you in Sydney!", "links": [["arXiv", "https://arxiv.org/abs/2610.07207"], ["Project page", "https://drmoet.github.io/"]] },
     { "date": "May 2026", "pre": "InfoFlow KV is accepted to", "venue": "ICML 2026", "post": " See you in Seoul!" },
     { "date": "Aug 2025", "pre": "Reveal and Release is accepted to", "venue": "Findings of EMNLP 2025" }
   ],
@@ -970,7 +970,9 @@ function AcademicVariant({ accent, fontPair, density, mode }) {
                   </div>
                   <div style={{
                     fontFamily: serif, fontSize: `${16 * dens.scale}px`, lineHeight: 1.55
-                  }}>{n.text ? n.text : (<>{n.pre} <strong style={{ fontWeight: 600, color: accentCol }}>{n.venue}</strong>!{n.post || ''}</>)}</div>
+                  }}>{n.text ? n.text : (<>{n.pre} <strong style={{ fontWeight: 600, color: accentCol }}>{n.venue}</strong>!{n.post || ''}</>)}{n.links && n.links.map(([label, href]) => (
+                    <React.Fragment key={href}>{' '}<a href={href} target="_blank" rel="noopener noreferrer" style={{ color: accentCol, textDecoration: 'underline', textUnderlineOffset: '3px', whiteSpace: 'nowrap' }}>{label}</a></React.Fragment>
+                  ))}</div>
                 </div>
               ))}
             </div>
@@ -1405,7 +1407,9 @@ function MinimalVariant({ accent, fontPair, density, mode }) {
                   <div style={{ fontFamily: mono, fontSize: '11.5px', color: muted, letterSpacing: '0.04em' }}>
                     {n.date}
                   </div>
-                  <div style={{ fontSize: `${15.5 * dens.scale}px`, lineHeight: 1.5 }}>{n.text}</div>
+                  <div style={{ fontSize: `${15.5 * dens.scale}px`, lineHeight: 1.5 }}>{n.text || `${n.pre} ${n.venue}!${n.post || ''}`}{n.links && n.links.map(([label, href]) => (
+                    <React.Fragment key={href}>{' '}<a href={href} target="_blank" rel="noopener noreferrer" style={{ color: accentCol, textDecoration: 'underline', textUnderlineOffset: '3px', whiteSpace: 'nowrap' }}>{label}</a></React.Fragment>
+                  ))}</div>
                   <div style={{ color: accentCol, opacity: 0.3 }}>→</div>
                 </div>
               ))}
@@ -2035,7 +2039,9 @@ function PlayfulVariant({ accent, fontPair, density, mode }) {
                 <div style={{
                   fontFamily: serif, fontSize: `${15.5 * dens.scale}px`,
                   lineHeight: 1.5, flex: 1, textWrap: 'pretty'
-                }}>{n.text}</div>
+                }}>{n.text || `${n.pre} ${n.venue}!${n.post || ''}`}{n.links && n.links.map(([label, href]) => (
+                    <React.Fragment key={href}>{' '}<a href={href} target="_blank" rel="noopener noreferrer" style={{ color: accentCol, textDecoration: 'underline', textUnderlineOffset: '3px', whiteSpace: 'nowrap' }}>{label}</a></React.Fragment>
+                  ))}</div>
               </div>
             );
           })}
